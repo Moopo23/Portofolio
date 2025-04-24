@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NQTHN - Portfolio Photographique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #fff;
+        }
+        
+        .logo span {
+            color: #00b4ff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+        
+        nav ul li a:hover {
+            color: #00b4ff;
+        }
+        
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-color: #00000000;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            color: white;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid #00b4ff;
+        }
+        
+        .btn:hover {
+            background-color: #00b4ff;
+            color: #000;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #00b4ff;
+            margin: 20px auto;
+        }
+        
+        .gallery {
+            padding: 100px 0;
+            background-color: #0a0a0a;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid #222;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: #00b4ff;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        
+        .overlay h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #00b4ff;
+        }
+        
+        .about {
+            padding: 100px 0;
+            background-color: #0f0f0f;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image:after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid #00b4ff;
+            z-index: -1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .contact {
+            padding: 100px 0;
+            background-color: #080808;
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 0;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #00b4ff;
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 150px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid #00b4ff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        button:hover {
+            background-color: #00b4ff;
+            color: #000;
+        }
+        
+        footer {
+            background-color: #000;
+            color: #ccc;
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        
+        .social-links {
+            margin: 25px 0;
+        }
+        
+        .social-links a {
+            color: #ccc;
+            margin: 0 15px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #00b4ff;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">NQTHN<span>.</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#a-propos">À propos</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="accueil" class="hero">
+        
+<div class="hero-bg">
+    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.1; position: absolute; top: 0; left: 0; z-index: -1;">
+        <source src="videoplayback2.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+</div>
+
+        <div class="hero-content">
+            <h1>NQTHN</h1>
+            <p>Photographie urbaine | Esthétique nocturne | Regards alternatifs</p>
+            <a href="#galerie" class="btn">Explorer</a>
+        </div>
+    </section>
+
+    <section id="galerie" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galerie</h2>
+            <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="DLC for download...  .....  - @nqthn_ @dragan_uz   - @nqthn_.jpg" alt="Portrait urbain">
+                <div class="overlay">
+                    <h3>Street Vibes</h3>
+                    <p>Un regard assumé dans l'obscurité urbaine</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="DLC for download...  .....  - @nqthn_ @dragan_uz   - @nqthn_ (1).jpg" alt="Pose nocturne">
+                <div class="overlay">
+                    <h3>Nocturne</h3>
+                    <p>Jeux d’ombres et de lumière, attitude déterminée</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="DLC for download...  .....  - @nqthn_ @dragan_uz   - @nqthn_ (2).jpg" alt="Geste fort">
+                <div class="overlay">
+                    <h3>Ready</h3>
+                    <p>Une posture qui interpelle dans l’obscurité</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="DLC for download...  .....  - @nqthn_ @dragan_uz   - @nqthn_ (3).jpg" alt="Action nocturne">
+                <div class="overlay">
+                    <h3>Impact</h3>
+                    <p>La tension visuelle dans un monde silencieux</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="G.O.A.T   @gabriel_crcls, @benson.bod, @hugo_.crt07, @azedontsleep   - @nqthn_ @saturnciti.jpg" alt="Groupe et auto">
+                <div class="overlay">
+                    <h3>Riderz</h3>
+                    <p>L’unité d’une équipe dans la rue</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="G.O.A.T   @gabriel_crcls, @benson.bod, @hugo_.crt07, @azedontsleep   - @nqthn_ @saturnciti (1).jpg" alt="Streetwear focus">
+                <div class="overlay">
+                    <h3>Saturn Touch</h3>
+                    <p>Le détail textile qui capte l’essence du style</p>
+                </div>
+            </div>
+
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Portrait urbain">
+                    <div class="overlay">
+                        <h3>Underground</h3>
+                        <p>Série de portraits dans la culture urbaine</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Mode urbaine">
+                    <div class="overlay">
+                        <h3>Streetwear</h3>
+                        <p>La mode de rue capturée dans son élément</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Nuit urbaine">
+                    <div class="overlay">
+                        <h3>After Dark</h3>
+                        <p>La ville s'éveille quand le soleil se couche</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Accessoires urbains">
+                    <div class="overlay">
+                        <h3>Détails</h3>
+                        <p>Les accessoires qui définissent un style</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Poses urbaines">
+                    <div class="overlay">
+                        <h3>Attitude</h3>
+                        <p>L'expression à travers la posture et le regard</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Automobiles">
+                    <div class="overlay">
+                        <h3>Machines</h3>
+                        <p>L'esthétique automobile dans la nuit urbaine</p>
+                    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="a-propos" class="about">
+        <div class="container">
+            <h2 class="section-title">À propos</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="r34.jpg" alt="Photographe">
+                </div>
+                <div class="about-text">
+                    <h2>Vision créative</h2>
+                    <p>Je suis un photographe spécialisé dans la capture de la culture urbaine contemporaine. Mon travail explore l'intersection entre la mode de rue, les sous-cultures urbaines et l'expression personnelle.</p>
+                    <p>Avec une esthétique inspirée par l'ambiance nocturne et les contrastes marqués, je cherche à mettre en lumière l'authenticité des sujets que je photographie, en m'attachant aux détails qui racontent une histoire plus large.</p>
+                    <p>Le projet NQTHN représente cette vision artistique qui navigue entre ombre et lumière, entre le réel et le stylisé, entre le portrait documentaire et la mise en scène esthétique.</p>
+                    <a href="#contact" class="btn">Collaborer</a>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="project">Type de projet</label>
+                    <input type="text" id="project" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">NQTHN<span>.</span></div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/nqthn_/">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Behance</a>
+            </div>
+            <p class="copyright">&copy; 2025 NQTHN Photography - Tous droits réservés</p>
+        </div>
+    </footer>
+</body>
+</html>
